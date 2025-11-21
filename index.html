@@ -36,6 +36,20 @@
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        @keyframes bounce-in {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
         .animate-float { animation: float 3s ease-in-out infinite; }
         .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
         .gradient-animated {
@@ -80,6 +94,95 @@
         }
         .fade-in {
             animation: slide-up 0.6s ease-out forwards;
+        }
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        .feature-card:hover::before {
+            left: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        }
+        .showcase-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        .showcase-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1rem;
+            padding: 2px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .showcase-card:hover::after {
+            opacity: 1;
+        }
+        .showcase-card:hover {
+            transform: translateY(-15px) rotate(1deg);
+        }
+        .photo-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .photo-card img {
+            transition: transform 0.5s ease;
+        }
+        .photo-card:hover img {
+            transform: scale(1.1);
+        }
+        .photo-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .photo-card:hover::after {
+            opacity: 1;
+        }
+        .location-card {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .location-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        .icon-wrapper {
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover .icon-wrapper {
+            transform: scale(1.2) rotate(5deg);
         }
     </style>
 </head>
@@ -281,59 +384,150 @@
     </section>
 
     <!-- Why Choose Us -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center text-blue-800 mb-12">Pourquoi Choisir ReparePhone ?</h2>
+    <section class="py-20 bg-gradient-to-b from-white via-blue-50 to-white relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style="animation-delay: 2s;"></div>
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-800 mb-4">Pourquoi Choisir ReparePhone ?</h2>
+                <p class="text-xl text-gray-600">L'excellence au service de votre technologie</p>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="text-center hover:-translate-y-2 transition duration-300">
-                    <i data-feather="clock" class="w-12 h-12 mx-auto text-blue-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">Rapide</h3>
-                    <p class="text-gray-600">Réparations express, souvent le jour même.</p>
+                <div class="feature-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-blue-500 relative">
+                    <div class="icon-wrapper bg-gradient-to-br from-blue-500 to-blue-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                        <i data-feather="clock" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-800">⚡ Rapide</h3>
+                    <p class="text-gray-600 mb-4">Réparations express, souvent le jour même.</p>
+                    <div class="bg-blue-50 rounded-lg p-3">
+                        <p class="text-sm font-semibold text-blue-700">30 min en moyenne</p>
+                    </div>
                 </div>
-                <div class="text-center hover:-translate-y-2 transition duration-300">
-                    <i data-feather="dollar-sign" class="w-12 h-12 mx-auto text-blue-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">Économique</h3>
-                    <p class="text-gray-600">Prix transparents et compétitifs.</p>
+                <div class="feature-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-green-500 relative">
+                    <div class="icon-wrapper bg-gradient-to-br from-green-500 to-green-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                        <i data-feather="dollar-sign" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-800">💰 Économique</h3>
+                    <p class="text-gray-600 mb-4">Prix transparents et compétitifs.</p>
+                    <div class="bg-green-50 rounded-lg p-3">
+                        <p class="text-sm font-semibold text-green-700">Devis gratuit</p>
+                    </div>
                 </div>
-                <div class="text-center hover:-translate-y-2 transition duration-300">
-                    <i data-feather="shield" class="w-12 h-12 mx-auto text-blue-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">Garantie</h3>
-                    <p class="text-gray-600">6 mois de garantie sur toutes nos réparations.</p>
+                <div class="feature-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-purple-500 relative">
+                    <div class="icon-wrapper bg-gradient-to-br from-purple-500 to-purple-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                        <i data-feather="shield" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-800">🛡️ Garantie</h3>
+                    <p class="text-gray-600 mb-4">6 mois de garantie sur toutes nos réparations.</p>
+                    <div class="bg-purple-50 rounded-lg p-3">
+                        <p class="text-sm font-semibold text-purple-700">100% couvert</p>
+                    </div>
                 </div>
-                <div class="text-center hover:-translate-y-2 transition duration-300">
-                    <i data-feather="map-pin" class="w-12 h-12 mx-auto text-blue-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">Local</h3>
-                    <p class="text-gray-600">Au cœur de Toulouse, facile d'accès.</p>
+                <div class="feature-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-orange-500 relative">
+                    <div class="icon-wrapper bg-gradient-to-br from-orange-500 to-orange-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                        <i data-feather="map-pin" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-800">📍 Local</h3>
+                    <p class="text-gray-600 mb-4">Au cœur de Toulouse, facile d'accès.</p>
+                    <div class="bg-orange-50 rounded-lg p-3">
+                        <p class="text-sm font-semibold text-orange-700">Métro L1 & Bus 70</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Repair Showcase Section -->
-    <section class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center text-blue-800 mb-12">Nous Réparons Bien Plus Que Les Téléphones</h2>
+    <section class="py-20 bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-1/4 left-0 w-64 h-64 bg-blue-400 rounded-full filter blur-3xl"></div>
+            <div class="absolute bottom-1/4 right-0 w-64 h-64 bg-purple-400 rounded-full filter blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-800 mb-4">Nous Réparons Bien Plus Que Les Téléphones</h2>
+                <p class="text-xl text-gray-600">Votre partenaire technologique pour tous vos appareils</p>
+            </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <!-- Phone Broken -->
-                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition duration-300 text-center">
-                    <img src="asset/images.jpg" class="w-40 mx-auto mb-4" alt="iPhone cassé">
-                    <h3 class="text-xl font-semibold mb-3">iPhone & Smartphones</h3>
-                    <p class="text-gray-600">Réparation d’écrans cassés, batteries, caméras, connecteurs... toutes marques.</p>
+                <div class="showcase-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-blue-500 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-100 rounded-full -mr-16 -mt-16 opacity-50"></div>
+                    <div class="relative z-10">
+                        <div class="bg-gradient-to-br from-blue-500 to-blue-700 w-24 h-24 rounded-2xl mx-auto mb-6 flex items-center justify-center transform hover:scale-110 transition-transform shadow-lg">
+                            <img src="asset/images.jpg" class="w-16 h-16 object-cover rounded-xl" alt="iPhone cassé">
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">📱 iPhone & Smartphones</h3>
+                        <p class="text-gray-600 mb-6">Réparation d'écrans cassés, batteries, caméras, connecteurs... toutes marques.</p>
+                        <div class="space-y-2 text-left">
+                            <div class="flex items-center gap-2 text-sm text-gray-700">
+                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                                <span>iPhone, Samsung, Huawei</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-700">
+                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                                <span>Tablettes & Smartwatches</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-700">
+                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                                <span>Pièces d'origine</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Macbook -->
-                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition duration-300 text-center">
-                    <img src="asset/mac.png" class="w-48 mx-auto mb-4" alt="Réparation Macbook">
-                    <h3 class="text-xl font-semibold mb-3">Ordinateurs & MacBook</h3>
-                    <p class="text-gray-600">Nous réparons PC portables, ordinateurs fixes, MacBook et iMac.</p>
+                <div class="showcase-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-purple-500 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-32 h-32 bg-purple-100 rounded-full -ml-16 -mt-16 opacity-50"></div>
+                    <div class="relative z-10">
+                        <div class="bg-gradient-to-br from-purple-500 to-purple-700 w-24 h-24 rounded-2xl mx-auto mb-6 flex items-center justify-center transform hover:scale-110 transition-transform shadow-lg">
+                            <img src="asset/mac.png" class="w-20 h-20 object-cover rounded-xl" alt="Réparation Macbook">
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">💻 Ordinateurs & MacBook</h3>
+                        <p class="text-gray-600 mb-6">Nous réparons PC portables, ordinateurs fixes, MacBook et iMac.</p>
+                        <div class="space-y-2 text-left">
+                            <div class="flex items-center gap-2 text-sm text-gray-700">
+                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                                <span>MacBook Pro/Air, iMac</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-700">
+                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                                <span>PC Windows & Linux</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-700">
+                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                                <span>Écrans & Claviers</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Printer -->
-                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition duration-300 text-center">
-                    <img src="asset/unite.jpg" class="w-40 mx-auto mb-4" alt="Réparation imprimantes">
-                    <h3 class="text-xl font-semibold mb-3">Unité central & Accessoires</h3>
-                    <p class="text-gray-600">Déblocage d'ordinateurs.</p>
+                <div class="showcase-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-orange-500 relative overflow-hidden">
+                    <div class="absolute bottom-0 right-0 w-32 h-32 bg-orange-100 rounded-full -mr-16 -mb-16 opacity-50"></div>
+                    <div class="relative z-10">
+                        <div class="bg-gradient-to-br from-orange-500 to-orange-700 w-24 h-24 rounded-2xl mx-auto mb-6 flex items-center justify-center transform hover:scale-110 transition-transform shadow-lg">
+                            <img src="asset/unite.jpg" class="w-16 h-16 object-cover rounded-xl" alt="Réparation imprimantes">
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">🖥️ Unité centrale & Accessoires</h3>
+                        <p class="text-gray-600 mb-6">Déblocage d'ordinateurs et réparation d'unités centrales.</p>
+                        <div class="space-y-2 text-left">
+                            <div class="flex items-center gap-2 text-sm text-gray-700">
+                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                                <span>Déblocage système</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-700">
+                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                                <span>Réparation hardware</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-700">
+                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                                <span>Upgrade & Maintenance</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -342,64 +536,106 @@
     <!-- Location Section -->
 
     <!-- Photos Boutique Section (placée juste au-dessus du footer) -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center text-blue-800 mb-12">Photos de Notre Boutique</h2>
+    <section class="py-20 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-800 mb-4">Découvrez Notre Boutique</h2>
+                <p class="text-xl text-gray-600">Un espace moderne et accueillant pour vos réparations</p>
+            </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <!-- Intérieur -->
-                <div class="rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300">
-                    <img src="asset/image2.png" alt="Intérieur de la boutique" class="w-full h-80 object-cover">
-                    <p class="text-center py-4 text-gray-700 font-semibold">Intérieur de la boutique</p>
+                <div class="photo-card rounded-2xl shadow-2xl overflow-hidden group cursor-pointer">
+                    <div class="relative h-96 overflow-hidden">
+                        <img src="asset/image2.png" alt="Intérieur de la boutique" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="text-2xl font-bold mb-2">Intérieur de la boutique</h3>
+                            <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Un espace moderne équipé des dernières technologies</p>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Extérieur -->
-                <div class="rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300">
-                    <img src="asset/image.png" alt="Extérieur de la boutique" class="w-full h-80 object-cover">
-                    <p class="text-center py-4 text-gray-700 font-semibold">Extérieur de la boutique</p>
+                <div class="photo-card rounded-2xl shadow-2xl overflow-hidden group cursor-pointer">
+                    <div class="relative h-96 overflow-hidden">
+                        <img src="asset/image.png" alt="Extérieur de la boutique" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="text-2xl font-bold mb-2">Extérieur de la boutique</h3>
+                            <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Facilement accessible en métro L1 et bus 70</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-16 bg-blue-800 text-white">
-        <div class="container mx-auto px-6">
+    <section class="py-20 location-card text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">📍 Notre Boutique à Toulouse</h2>
+                <p class="text-xl opacity-90">Venez nous rendre visite, nous vous accueillons avec plaisir !</p>
+            </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-3xl font-bold mb-6">Notre Boutique à Toulouse</h2>
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-    <i data-feather="map-pin" class="w-6 h-6 mr-4"></i>
-    <p>
-        65 Route de Blagnac<br>31300 Toulouse<br>
-        <span class="inline-flex items-center gap-2 mt-2">
-            <span class="bg-orange-500 text-white px-2 py-1 rounded text-xs font-bold">L1</span>
-            <span class="bg-pink-500 text-white px-2 py-1 rounded text-xs font-bold">70</span>
-            <span class="text-sm">— Arrêt “Cité Madrid”, juste en face</span>
-        </span>
-    </p>
-</div>
-                        <div class="flex items-center">
-                            <i data-feather="phone" class="w-6 h-6 mr-4"></i>
-                            <p>05 61 23 45 67</p>
+                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-2xl">
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4 group">
+                            <div class="bg-white/20 p-3 rounded-xl group-hover:bg-white/30 transition-colors">
+                                <i data-feather="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-2">Adresse</h3>
+                                <p class="opacity-90">
+                                    65 Route de Blagnac<br>31300 Toulouse<br>
+                                    <span class="inline-flex items-center gap-2 mt-2">
+                                        <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg transform hover:scale-110 transition-transform">L1</span>
+                                        <span class="bg-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg transform hover:scale-110 transition-transform">70</span>
+                                        <span class="text-sm">— Arrêt "Cité Madrid", juste en face</span>
+                                    </span>
+                                </p>
+                            </div>
                         </div>
-                        <div class="flex items-center">
-                            <i data-feather="mail" class="w-6 h-6 mr-4"></i>
-                            <p>contact@reparephone-toulouse.fr</p>
+                        <div class="flex items-start gap-4 group">
+                            <div class="bg-white/20 p-3 rounded-xl group-hover:bg-white/30 transition-colors">
+                                <i data-feather="phone" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-2">Téléphone</h3>
+                                <a href="tel:0561234567" class="text-lg opacity-90 hover:opacity-100 transition-opacity">05 61 23 45 67</a>
+                            </div>
                         </div>
-                        <div class="flex items-center">
-                            <i data-feather="clock" class="w-6 h-6 mr-4"></i>
-                            <p>Lun-Ven: 9h-19h<br>Sam: 10h-18h</p>
+                        <div class="flex items-start gap-4 group">
+                            <div class="bg-white/20 p-3 rounded-xl group-hover:bg-white/30 transition-colors">
+                                <i data-feather="mail" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-2">Email</h3>
+                                <a href="mailto:contact@reparephone-toulouse.fr" class="opacity-90 hover:opacity-100 transition-opacity break-all">contact@reparephone-toulouse.fr</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 group">
+                            <div class="bg-white/20 p-3 rounded-xl group-hover:bg-white/30 transition-colors">
+                                <i data-feather="clock" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg mb-2">Horaires</h3>
+                                <p class="opacity-90">Lun-Ven: 9h-19h<br>Sam: 10h-18h</p>
+                            </div>
                         </div>
                     </div>
-                    <a href="contact.html" class="inline-block bg-white text-blue-800 px-6 py-3 rounded-full font-semibold mt-6 hover:bg-blue-50 transition duration-300 shadow-lg">
-                        Nous Contacter
+                    <a href="contact.html" class="mt-8 inline-block bg-white text-blue-800 px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-50 transition-all duration-300 shadow-2xl transform hover:scale-105 w-full text-center">
+                        ✨ Nous Contacter
                     </a>
                 </div>
-                <div class="bg-white p-4 rounded-lg shadow-lg">
+                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-4 shadow-2xl border border-white/20 transform hover:scale-105 transition-transform duration-300">
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2888.879460461421!2d1.4442463154992915!3d43.60465207912379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12aebc9c43f!2sToulouse!5e0!3m2!1sfr!2sfr!4v1610000000000"
-                        width="100%" height="300" class="rounded-lg" allowfullscreen="" loading="lazy">
+                        width="100%" height="400" class="rounded-xl" allowfullscreen="" loading="lazy">
                     </iframe>
                 </div>
             </div>
@@ -435,6 +671,30 @@
             observer.observe(card);
         });
         
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+        
+        // Observe showcase cards
+        document.querySelectorAll('.showcase-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+        
+        // Observe photo cards
+        document.querySelectorAll('.photo-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+        
         // CTA button pulse effect
         const ctaButton = document.querySelector('.cta-button');
         if (ctaButton) {
@@ -445,6 +705,16 @@
                 }, 200);
             }, 3000);
         }
+        
+        // Stagger animation for feature cards
+        document.querySelectorAll('.feature-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+        
+        // Stagger animation for showcase cards
+        document.querySelectorAll('.showcase-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.15}s`;
+        });
     </script>
 </body>
 </html>
