@@ -18,57 +18,263 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.8), 0 0 60px rgba(59, 130, 246, 0.4); }
+        }
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes slide-up {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+        .gradient-animated {
+            background: linear-gradient(-45deg, #3b82f6, #2563eb, #1d4ed8, #1e40af);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+        .service-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+        .cta-button {
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        .sub-service {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.3s ease;
+        }
+        .service-card:hover .sub-service {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .fade-in {
+            animation: slide-up 0.6s ease-out forwards;
+        }
+    </style>
 </head>
 <body class="bg-white">
     <!-- Header/Navigation Component -->
     <custom-header></custom-header>
 
     <!-- Hero Section -->
-    <section class="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white pt-10 pb-20 overflow-hidden">
-        <img src="asset/brigademobile.png" class="absolute right-0 bottom-0 w-48 md:w-72 opacity-40 md:opacity-60 pointer-events-none select-none" alt="Téléphone PNG" />
+    <section class="relative gradient-animated text-white pt-10 pb-20 overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-float"></div>
+            <div class="absolute top-40 right-10 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-float" style="animation-delay: 1s;"></div>
+            <div class="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-float" style="animation-delay: 2s;"></div>
+        </div>
+        <img src="asset/brigademobile.png" class="absolute right-0 bottom-0 w-48 md:w-72 opacity-20 md:opacity-30 pointer-events-none select-none" alt="Téléphone PNG" />
         <div class="container mx-auto px-6 text-center relative z-10">
-            <img src="asset/brigademobile.png" class="w-56 md:w-80 mx-auto drop-shadow-2xl" alt="Brigade Mobile" />
-            <p class="text-3xl md:text-5xl">Votre expert en réparation de téléphone au cœur de Toulouse</p><br/>
+            <div class="fade-in">
+                <img src="asset/brigademobile.png" class="w-56 md:w-80 mx-auto drop-shadow-2xl animate-float" alt="Brigade Mobile" />
+                <p class="text-3xl md:text-5xl font-bold mt-4 mb-2 text-shadow-lg">Votre expert en réparation de téléphone au cœur de Toulouse</p>
+                <p class="text-lg md:text-xl mb-6 opacity-90">Technologie de pointe • Réparation express • Garantie 6 mois</p>
+            </div>
 
-<!-- Badges Lignes Métro/Bus -->
-<div class="flex justify-center gap-3 mb-8">
-    <span class="bg-orange-500 text-white px-3 py-1 rounded text-sm font-bold shadow-md">L1</span>
-    <span class="bg-pink-500 text-white px-3 py-1 rounded text-sm font-bold shadow-md">70</span>
-    <span class="text-white text-sm font-medium">— Arrêt “Cité Madrid” </span>
-</div>
-            <div class="flex flex-col md:flex-row justify-center gap-4">
-                <a href="contact.html" class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition duration-300 shadow-md">
-                    Prendre RDV
+            <!-- Badges Lignes Métro/Bus -->
+            <div class="flex justify-center gap-3 mb-8 fade-in" style="animation-delay: 0.2s;">
+                <span class="bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg transform hover:scale-110 transition-transform">L1</span>
+                <span class="bg-pink-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg transform hover:scale-110 transition-transform">70</span>
+                <span class="text-white text-sm font-medium flex items-center">— Arrêt "Cité Madrid"</span>
+            </div>
+            
+            <!-- CTA Buttons with enhanced effects -->
+            <div class="flex flex-col md:flex-row justify-center gap-4 fade-in" style="animation-delay: 0.4s;">
+                <a href="contact.html" class="cta-button bg-white text-blue-600 px-10 py-4 rounded-full font-bold text-lg hover:bg-blue-50 transition-all duration-300 shadow-2xl animate-pulse-glow relative z-10 transform hover:scale-105">
+                    <span class="relative z-10">✨ Prendre RDV Maintenant</span>
                 </a>
-                <a href="services.html" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition duration-300 shadow-md">
-                    Nos Services
+                <a href="services.html" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 shadow-xl relative z-10 transform hover:scale-105 backdrop-blur-sm bg-white/10">
+                    Découvrir Nos Services
                 </a>
+            </div>
+            
+            <!-- Trust indicators -->
+            <div class="mt-12 flex flex-wrap justify-center gap-6 text-sm opacity-80 fade-in" style="animation-delay: 0.6s;">
+                <div class="flex items-center gap-2">
+                    <i data-feather="check-circle" class="w-5 h-5"></i>
+                    <span>Réparation en 30 min</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i data-feather="shield" class="w-5 h-5"></i>
+                    <span>Garantie 6 mois</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i data-feather="star" class="w-5 h-5"></i>
+                    <span>4.9/5 ⭐ (200+ avis)</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Services Preview -->
-    <section class="py-16 bg-blue-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center text-blue-800 mb-12">Nos Services de Réparation</h2>
+    <section class="py-20 bg-gradient-to-b from-blue-50 to-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-800 mb-4">Nos Services de Réparation</h2>
+                <p class="text-xl text-gray-600">Des solutions complètes pour tous vos besoins</p>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-2xl hover:-translate-y-2 transition duration-300">
-                    <i data-feather="smartphone" class="w-16 h-16 mx-auto text-blue-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">Écran Cassé</h3>
-                    <p class="text-gray-600 mb-4">Remplacement d'écran pour tous modèles de téléphone.</p>
-                    <a href="services.html#ecran" class="text-blue-600 font-semibold hover:text-blue-800">En savoir plus</a>
+                <!-- Écran Cassé -->
+                <div class="service-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-blue-500">
+                    <div class="bg-gradient-to-br from-blue-500 to-blue-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center transform rotate-3 hover:rotate-6 transition-transform">
+                        <i data-feather="smartphone" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-800">Écran Cassé</h3>
+                    <p class="text-gray-600 mb-6">Remplacement d'écran pour tous modèles de téléphone.</p>
+                    
+                    <!-- Sous-services -->
+                    <div class="space-y-2 mb-6">
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
+                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <span>Écran LCD/OLED</span>
+                        </div>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
+                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <span>Vitre tactile</span>
+                        </div>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
+                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <span>Réparation express</span>
+                        </div>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
+                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <span>Toutes marques</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-lg p-3 mb-4">
+                        <p class="text-sm font-semibold text-blue-700">À partir de 49€</p>
+                    </div>
+                    <a href="services.html#ecran" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition-all transform hover:scale-105">
+                        En savoir plus →
+                    </a>
                 </div>
-                <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-2xl hover:-translate-y-2 transition duration-300">
-                    <i data-feather="battery" class="w-16 h-16 mx-auto text-blue-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">Batterie</h3>
-                    <p class="text-gray-600 mb-4">Remplacement de batterie pour une autonomie retrouvée.</p>
-                    <a href="services.html#batterie" class="text-blue-600 font-semibold hover:text-blue-800">En savoir plus</a>
+                
+                <!-- Batterie -->
+                <div class="service-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-blue-500">
+                    <div class="bg-gradient-to-br from-green-500 to-green-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center transform -rotate-3 hover:-rotate-6 transition-transform">
+                        <i data-feather="battery" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-800">Batterie</h3>
+                    <p class="text-gray-600 mb-6">Remplacement de batterie pour une autonomie retrouvée.</p>
+                    
+                    <!-- Sous-services -->
+                    <div class="space-y-2 mb-6">
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
+                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <span>Batterie originale</span>
+                        </div>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
+                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <span>Diagnostic gratuit</span>
+                        </div>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
+                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <span>Autonomie restaurée</span>
+                        </div>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
+                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <span>Installation rapide</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 rounded-lg p-3 mb-4">
+                        <p class="text-sm font-semibold text-green-700">À partir de 39€</p>
+                    </div>
+                    <a href="services.html#batterie" class="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition-all transform hover:scale-105">
+                        En savoir plus →
+                    </a>
                 </div>
-                <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-2xl hover:-translate-y-2 transition duration-300">
-                    <i data-feather="camera" class="w-16 h-16 mx-auto text-blue-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">Caméra</h3>
-                    <p class="text-gray-600 mb-4">Réparation et remplacement de caméra défectueuse.</p>
-                    <a href="services.html#camera" class="text-blue-600 font-semibold hover:text-blue-800">En savoir plus</a>
+                
+                <!-- Caméra -->
+                <div class="service-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-blue-500">
+                    <div class="bg-gradient-to-br from-purple-500 to-purple-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center transform rotate-3 hover:rotate-6 transition-transform">
+                        <i data-feather="camera" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-800">Caméra</h3>
+                    <p class="text-gray-600 mb-6">Réparation et remplacement de caméra défectueuse.</p>
+                    
+                    <!-- Sous-services -->
+                    <div class="space-y-2 mb-6">
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
+                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <span>Caméra arrière/avant</span>
+                        </div>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
+                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <span>Flash LED</span>
+                        </div>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
+                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <span>Calibration</span>
+                        </div>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
+                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <span>Qualité optimale</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-purple-50 rounded-lg p-3 mb-4">
+                        <p class="text-sm font-semibold text-purple-700">À partir de 59€</p>
+                    </div>
+                    <a href="services.html#camera" class="inline-block bg-purple-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-purple-700 transition-all transform hover:scale-105">
+                        En savoir plus →
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Additional services row -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                <div class="service-card bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl shadow-lg p-6 text-center border-2 border-orange-200">
+                    <i data-feather="wifi" class="w-12 h-12 mx-auto text-orange-600 mb-4"></i>
+                    <h4 class="font-bold mb-2">Connecteur</h4>
+                    <p class="text-sm text-gray-600 mb-3">Port de charge, jack audio</p>
+                    <span class="text-xs font-semibold text-orange-700">À partir de 35€</span>
+                </div>
+                <div class="service-card bg-gradient-to-br from-red-50 to-red-100 rounded-2xl shadow-lg p-6 text-center border-2 border-red-200">
+                    <i data-feather="droplet" class="w-12 h-12 mx-auto text-red-600 mb-4"></i>
+                    <h4 class="font-bold mb-2">Désoxydation</h4>
+                    <p class="text-sm text-gray-600 mb-3">Traitement anti-eau</p>
+                    <span class="text-xs font-semibold text-red-700">À partir de 45€</span>
+                </div>
+                <div class="service-card bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-2xl shadow-lg p-6 text-center border-2 border-indigo-200">
+                    <i data-feather="tool" class="w-12 h-12 mx-auto text-indigo-600 mb-4"></i>
+                    <h4 class="font-bold mb-2">Diagnostic</h4>
+                    <p class="text-sm text-gray-600 mb-3">Analyse complète gratuite</p>
+                    <span class="text-xs font-semibold text-indigo-700">Gratuit</span>
                 </div>
             </div>
         </div>
@@ -142,16 +348,14 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <!-- Intérieur -->
-                <div class="rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 h-80">
-                    <img src="asset/image2.png" alt="Intérieur de la boutique" class="w-full h-full object-cover">
-                </div">
+                <div class="rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300">
+                    <img src="asset/image2.png" alt="Intérieur de la boutique" class="w-full h-80 object-cover">
                     <p class="text-center py-4 text-gray-700 font-semibold">Intérieur de la boutique</p>
                 </div>
 
                 <!-- Extérieur -->
-                <div class="rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 h-80">
-                    <img src="asset/image.png" alt="Extérieur de la boutique" class="w-full h-full object-cover">
-                </div">
+                <div class="rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300">
+                    <img src="asset/image.png" alt="Extérieur de la boutique" class="w-full h-80 object-cover">
                     <p class="text-center py-4 text-gray-700 font-semibold">Extérieur de la boutique</p>
                 </div>
             </div>
@@ -207,6 +411,40 @@
 
     <script>
         feather.replace();
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+        
+        // CTA button pulse effect
+        const ctaButton = document.querySelector('.cta-button');
+        if (ctaButton) {
+            setInterval(() => {
+                ctaButton.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    ctaButton.style.transform = 'scale(1)';
+                }, 200);
+            }, 3000);
+        }
     </script>
 </body>
 </html>
