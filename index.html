@@ -27,33 +27,66 @@
         /* Performance optimizations */
         body {
             overflow-x: hidden;
-            background: linear-gradient(to bottom, #111827 0%, #1f2937 50%, #111827 100%);
+            background: linear-gradient(to bottom, #111827 0%, #1f2937 30%, #1e2937 60%, #064e3b 80%, #022c22 100%);
             min-height: 100vh;
             position: relative;
         }
         
-        /* Fond global avec grid pattern */
+        /* Fond global avec grid pattern (transition bleu vers vert) */
         body::before {
             content: '';
             position: fixed;
             inset: 0;
-            background-image: linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px), 
-                              linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: 0.1;
+            background-image: 
+                linear-gradient(to bottom, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 50%, rgba(34, 197, 94, 0.05) 80%, rgba(34, 197, 94, 0.1) 100%),
+                linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px), 
+                linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+            background-size: 100% 100%, 50px 50px, 50px 50px;
             pointer-events: none;
             z-index: 0;
         }
         
-        /* Bulles de lumière globales */
+        /* Bulles de lumière globales (comme boutiques.html footer) */
         body::after {
             content: '';
             position: fixed;
             inset: 0;
-            background: radial-gradient(ellipse at top left, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                        radial-gradient(ellipse at bottom right, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
+        }
+        
+        /* Bulles de lumière fixes avec transition bleu vers vert */
+        .global-light-bubbles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .global-light-bubbles::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 25%;
+            width: 384px;
+            height: 384px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            filter: blur(96px);
+        }
+        
+        .global-light-bubbles::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 25%;
+            width: 384px;
+            height: 384px;
+            background: rgba(34, 197, 94, 0.2);
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            filter: blur(96px);
         }
         
         /* GPU acceleration for smooth animations */
@@ -210,6 +243,7 @@
         .gradient-animated {
             background: transparent;
             position: relative;
+            z-index: 1;
         }
         
         /* Image personnage retour.png à gauche */
@@ -669,6 +703,9 @@
     </style>
 </head>
 <body>
+    <!-- Bulles de lumière globales -->
+    <div class="global-light-bubbles"></div>
+    
     <!-- Header/Navigation Component -->
     <custom-header></custom-header>
 
@@ -710,11 +747,8 @@
             
             <!-- CTA Buttons with enhanced effects -->
             <div class="flex flex-col md:flex-row justify-center gap-4 fade-in" style="animation-delay: 0.4s;">
-                <a href="contact.html" class="cta-button bg-gradient-to-r from-blue-500 to-purple-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-2xl relative z-10 transform hover:scale-105 border-2 border-black">
+                <a href="tel:0561234567" class="cta-button bg-gradient-to-r from-blue-500 to-purple-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-2xl relative z-10 transform hover:scale-105 border-2 border-black">
                     <span class="relative z-10">✨ Prendre RDV Maintenant</span>
-                </a>
-                <a href="services.html" class="bg-blue-400/90 backdrop-blur-sm border-2 border-black text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-blue-500/90 transition-all duration-300 shadow-xl relative z-10 transform hover:scale-105">
-                    <span class="relative z-10">Découvrir Nos Services</span>
                 </a>
                 <a href="boutiques.html" class="bg-blue-400/90 backdrop-blur-sm border-2 border-black text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-blue-500/90 transition-all duration-300 shadow-xl relative z-10 transform hover:scale-105">
                     <span class="relative z-10">📍 Nos Boutiques</span>
@@ -743,110 +777,12 @@
     <section class="py-20 relative overflow-hidden">
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 neon-text" style="text-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 60px rgba(139, 92, 246, 0.6);">Nos Services de Réparation</h2>
-                <p class="text-xl text-gray-300">Des solutions complètes pour tous vos besoins</p>
+                <div class="inline-block mb-4">
+                    <span class="bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text text-sm font-bold uppercase tracking-wider">Nos Services</span>
+                </div>
+                <h2 class="text-5xl md:text-6xl font-bold text-white mb-4" style="text-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 60px rgba(139, 92, 246, 0.6);">de Réparation</h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">Des solutions complètes pour tous vos besoins en réparation de téléphone</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Écran Cassé -->
-                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20">
-                    <div class="bg-gradient-to-br from-blue-500 to-blue-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center transform rotate-3">
-                        <i data-feather="smartphone" class="w-10 h-10 text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3 text-white">Écran Cassé</h3>
-                    <p class="text-gray-300 mb-6">Remplacement d'écran pour tous modèles de téléphone.</p>
-                    
-                    <!-- Sous-services -->
-                    <div class="space-y-2 mb-6">
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
-                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
-                            <span>Écran LCD/OLED</span>
-                        </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
-                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
-                            <span>Vitre tactile</span>
-                        </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
-                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
-                            <span>Réparation express</span>
-                        </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
-                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
-                            <span>Toutes marques</span>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-blue-500/20 backdrop-blur-sm rounded-lg p-3 border border-blue-400/30">
-                        <p class="text-sm font-semibold text-blue-300">À partir de 49€</p>
-                    </div>
-                </div>
-                
-                <!-- Batterie -->
-                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20">
-                    <div class="bg-gradient-to-br from-green-500 to-green-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center transform -rotate-3">
-                        <i data-feather="battery" class="w-10 h-10 text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3 text-white">Batterie</h3>
-                    <p class="text-gray-300 mb-6">Remplacement de batterie pour une autonomie retrouvée.</p>
-                    
-                    <!-- Sous-services -->
-                    <div class="space-y-2 mb-6">
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
-                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
-                            <span>Batterie originale</span>
-                        </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
-                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
-                            <span>Diagnostic gratuit</span>
-                        </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
-                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
-                            <span>Autonomie restaurée</span>
-                        </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
-                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
-                            <span>Installation rapide</span>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-green-500/20 backdrop-blur-sm rounded-lg p-3 border border-green-400/30">
-                        <p class="text-sm font-semibold text-green-300">À partir de 39€</p>
-                    </div>
-                </div>
-                
-                <!-- Caméra -->
-                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20">
-                    <div class="bg-gradient-to-br from-purple-500 to-purple-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center transform rotate-3">
-                        <i data-feather="camera" class="w-10 h-10 text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3 text-white">Caméra</h3>
-                    <p class="text-gray-300 mb-6">Réparation et remplacement de caméra défectueuse.</p>
-                    
-                    <!-- Sous-services -->
-                    <div class="space-y-2 mb-6">
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
-                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
-                            <span>Caméra arrière/avant</span>
-                        </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
-                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
-                            <span>Flash LED</span>
-                        </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
-                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
-                            <span>Calibration</span>
-                        </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
-                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
-                            <span>Qualité optimale</span>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-purple-500/20 backdrop-blur-sm rounded-lg p-3 border border-purple-400/30">
-                        <p class="text-sm font-semibold text-purple-300">À partir de 59€</p>
-                    </div>
-                </div>
-            </div>
-            
             <!-- Additional services row -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
                 <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg p-6 text-center border border-white/20">
@@ -1096,8 +1032,8 @@
                         </div>
                     </div>
                         <div class="flex flex-col gap-4 mt-8">
-                            <a href="contact.html" class="inline-block bg-white text-blue-800 px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-50 transition-all duration-300 shadow-2xl transform hover:scale-105 w-full text-center relative z-10">
-                        ✨ Nous Contacter
+                            <a href="tel:0561234567" class="inline-block bg-white text-blue-800 px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-50 transition-all duration-300 shadow-2xl transform hover:scale-105 w-full text-center relative z-10">
+                        ✨ Nous Appeler
                     </a>
                             <a href="boutiques.html" class="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-2xl transform hover:scale-105 w-full text-center relative z-10 border-2 border-white/20">
                                 📍 Découvrir Notre Boutique
@@ -1159,12 +1095,6 @@
                                 Nos Boutiques
                             </a>
                         </li>
-                        <li>
-                            <a href="contact.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
-                                <i data-feather="mail" class="w-4 h-4 group-hover:text-blue-400 transition-colors"></i>
-                                Contact
-                            </a>
-                        </li>
                     </ul>
                 </div>
                 
@@ -1222,8 +1152,8 @@
                             <i data-feather="twitter" class="w-6 h-6 text-white"></i>
                         </a>
                     </div>
-                    <a href="contact.html" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-bold text-sm hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg transform hover:scale-105 w-full text-center">
-                        ✨ Prendre RDV
+                    <a href="tel:0561234567" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-bold text-sm hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg transform hover:scale-105 w-full text-center">
+                        ✨ Appeler maintenant
                     </a>
                 </div>
             </div>

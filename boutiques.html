@@ -16,8 +16,63 @@
         
         body {
             overflow-x: hidden;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            background: linear-gradient(to bottom, #111827 0%, #1f2937 50%, #000000 100%);
             min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Fond global avec grid pattern (comme footer) */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Bulles de lumière globales (comme footer) */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .global-light-bubbles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .global-light-bubbles::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 25%;
+            width: 384px;
+            height: 384px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            filter: blur(96px);
+        }
+        
+        .global-light-bubbles::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 25%;
+            width: 384px;
+            height: 384px;
+            background: rgba(139, 92, 246, 0.2);
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            filter: blur(96px);
         }
         
         /* Futuristic tabs */
@@ -268,6 +323,9 @@
     </style>
 </head>
 <body>
+    <!-- Bulles de lumière globales -->
+    <div class="global-light-bubbles"></div>
+    
     <!-- Particle Background -->
     <div class="particles-bg" id="particles"></div>
     
@@ -401,12 +459,6 @@
                         <div class="mb-6">
                             <h3 class="font-semibold text-white mb-4">Contact :</h3>
                             <div class="space-y-3">
-                                <a href="contact.html" class="btn-futuristic w-full inline-flex items-center justify-center gap-2">
-                                    <span>
-                                        <i data-feather="calendar" class="w-5 h-5"></i>
-                                    </span>
-                                    <span>Prendre rendez-vous</span>
-                                </a>
                                 <a href="tel:0561234567" class="btn-futuristic w-full inline-flex items-center justify-center gap-2" style="background: linear-gradient(135deg, #10b981, #059669);">
                                     <span>
                                         <i data-feather="phone" class="w-5 h-5"></i>
@@ -493,12 +545,6 @@
                                 Nos Boutiques
                             </a>
                         </li>
-                        <li>
-                            <a href="contact.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
-                                <i data-feather="mail" class="w-4 h-4 group-hover:text-blue-400 transition-colors"></i>
-                                Contact
-                            </a>
-                        </li>
                     </ul>
                 </div>
                 
@@ -556,8 +602,8 @@
                             <i data-feather="twitter" class="w-6 h-6 text-white"></i>
                         </a>
                     </div>
-                    <a href="contact.html" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-bold text-sm hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg transform hover:scale-105 w-full text-center">
-                        ✨ Prendre RDV
+                    <a href="index.html" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-bold text-sm hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg transform hover:scale-105 w-full text-center">
+                        ✨ Retour à l'accueil
                     </a>
                 </div>
             </div>
