@@ -27,6 +27,33 @@
         /* Performance optimizations */
         body {
             overflow-x: hidden;
+            background: linear-gradient(to bottom, #111827 0%, #1f2937 50%, #111827 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Fond global avec grid pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Bulles de lumière globales */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at top left, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                        radial-gradient(ellipse at bottom right, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
         
         /* GPU acceleration for smooth animations */
@@ -144,15 +171,74 @@
             75% { border-color: rgba(59, 130, 246, 0.5); }
         }
         
+        /* Section transition avec clés à molette */
+        .wrench-divider {
+            position: relative;
+            background: linear-gradient(to bottom, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%);
+            padding: 30px 0;
+            overflow: hidden;
+        }
+        
+        .wrench-pattern {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            opacity: 0.3;
+        }
+        
+        .wrench-icon {
+            color: rgba(59, 130, 246, 0.4);
+            animation: wrench-float 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
+        }
+        
+        .wrench-icon:nth-child(1) { animation-delay: 0s; }
+        .wrench-icon:nth-child(2) { animation-delay: 0.3s; }
+        .wrench-icon:nth-child(3) { animation-delay: 0.6s; }
+        .wrench-icon:nth-child(4) { animation-delay: 0.9s; }
+        .wrench-icon:nth-child(5) { animation-delay: 1.2s; }
+        .wrench-icon:nth-child(6) { animation-delay: 1.5s; }
+        .wrench-icon:nth-child(7) { animation-delay: 1.8s; }
+        .wrench-icon:nth-child(8) { animation-delay: 2.1s; }
+        .wrench-icon:nth-child(9) { animation-delay: 2.4s; }
+        .wrench-icon:nth-child(10) { animation-delay: 2.7s; }
+        .wrench-icon:nth-child(11) { animation-delay: 3s; }
+        .wrench-icon:nth-child(12) { animation-delay: 3.3s; }
+        .wrench-icon:nth-child(13) { animation-delay: 3.6s; }
+        .wrench-icon:nth-child(14) { animation-delay: 3.9s; }
+        .wrench-icon:nth-child(15) { animation-delay: 4.2s; }
+        .wrench-icon:nth-child(16) { animation-delay: 4.5s; }
+        
+        @keyframes wrench-float {
+            0%, 100% { 
+                transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: translate3d(0, -15px, 0) rotate(15deg) scale(1.1);
+                opacity: 0.5;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .wrench-pattern {
+                gap: 25px;
+            }
+            .wrench-icon {
+                width: 32px;
+                height: 32px;
+            }
+        }
+        
         .animate-float { animation: float 3s ease-in-out infinite; }
         .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
         .animate-neon { animation: neon-pulse 2s ease-in-out infinite; }
         .animate-glitch { animation: glitch 0.3s infinite; }
         
         .gradient-animated {
-            background: linear-gradient(-45deg, #3b82f6, #8b5cf6, #ec4899, #06b6d4, #3b82f6);
-            background-size: 400% 400%;
-            animation: gradient-shift 15s ease infinite;
+            background: linear-gradient(to bottom, #dbeafe 0%, #bfdbfe 30%, #93c5fd 60%, #60a5fa 100%);
             position: relative;
         }
         
@@ -615,7 +701,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-900">
+<body>
     <!-- Header/Navigation Component -->
     <custom-header></custom-header>
 
@@ -629,10 +715,10 @@
         
         <!-- Animated background elements with enhanced glow -->
         <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full mix-blend-screen filter blur-3xl opacity-40 animate-float" style="box-shadow: 0 0 100px rgba(59, 130, 246, 0.6);"></div>
-            <div class="absolute top-40 right-10 w-72 h-72 bg-purple-400 rounded-full mix-blend-screen filter blur-3xl opacity-40 animate-float" style="animation-delay: 1s; box-shadow: 0 0 100px rgba(139, 92, 246, 0.6);"></div>
-            <div class="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-400 rounded-full mix-blend-screen filter blur-3xl opacity-40 animate-float" style="animation-delay: 2s; box-shadow: 0 0 100px rgba(236, 72, 153, 0.6);"></div>
-            <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-cyan-400 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-float" style="animation-delay: 1.5s; box-shadow: 0 0 120px rgba(6, 182, 212, 0.5);"></div>
+            <div class="absolute top-20 left-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-float" style="box-shadow: 0 0 100px rgba(191, 219, 254, 0.4);"></div>
+            <div class="absolute top-40 right-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-float" style="animation-delay: 1s; box-shadow: 0 0 100px rgba(147, 197, 253, 0.4);"></div>
+            <div class="absolute -bottom-8 left-1/2 w-72 h-72 bg-blue-200 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-float" style="animation-delay: 2s; box-shadow: 0 0 100px rgba(191, 219, 254, 0.4);"></div>
+            <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-blue-100 rounded-full mix-blend-screen filter blur-3xl opacity-25 animate-float" style="animation-delay: 1.5s; box-shadow: 0 0 120px rgba(219, 234, 254, 0.3);"></div>
         </div>
         
         <!-- Grid pattern overlay -->
@@ -688,15 +774,26 @@
         </div>
     </section>
 
+    <!-- Section transition avec clés à molette -->
+    <section class="wrench-divider">
+        <div class="wrench-pattern">
+            <i data-feather="tool" class="wrench-icon w-8 h-8"></i>
+            <i data-feather="tool" class="wrench-icon w-9 h-9"></i>
+            <i data-feather="tool" class="wrench-icon w-8 h-8"></i>
+            <i data-feather="tool" class="wrench-icon w-10 h-10"></i>
+            <i data-feather="tool" class="wrench-icon w-8 h-8"></i>
+            <i data-feather="tool" class="wrench-icon w-9 h-9"></i>
+            <i data-feather="tool" class="wrench-icon w-8 h-8"></i>
+            <i data-feather="tool" class="wrench-icon w-10 h-10"></i>
+            <i data-feather="tool" class="wrench-icon w-8 h-8"></i>
+            <i data-feather="tool" class="wrench-icon w-9 h-9"></i>
+            <i data-feather="tool" class="wrench-icon w-8 h-8"></i>
+            <i data-feather="tool" class="wrench-icon w-10 h-10"></i>
+        </div>
+    </section>
+
     <!-- Services Preview -->
     <section class="py-20 relative overflow-hidden">
-        <!-- Background avec effets -->
-        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-black"></div>
-        <div class="absolute inset-0 grid-pattern opacity-10"></div>
-        <div class="absolute inset-0">
-            <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float"></div>
-            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float" style="animation-delay: 2s;"></div>
-        </div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 neon-text" style="text-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 60px rgba(139, 92, 246, 0.6);">Nos Services de Réparation</h2>
@@ -704,8 +801,8 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Écran Cassé -->
-                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20 hover:border-blue-400/50">
-                    <div class="bg-gradient-to-br from-blue-500 to-blue-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center transform rotate-3 hover:rotate-6 transition-transform">
+                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20">
+                    <div class="bg-gradient-to-br from-blue-500 to-blue-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center transform rotate-3">
                         <i data-feather="smartphone" class="w-10 h-10 text-white"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-3 text-white">Écran Cassé</h3>
@@ -731,17 +828,14 @@
                         </div>
                     </div>
                     
-                    <div class="bg-blue-500/20 backdrop-blur-sm rounded-lg p-3 mb-4 border border-blue-400/30">
+                    <div class="bg-blue-500/20 backdrop-blur-sm rounded-lg p-3 border border-blue-400/30">
                         <p class="text-sm font-semibold text-blue-300">À partir de 49€</p>
                     </div>
-                    <a href="services.html#ecran" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full font-semibold hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105">
-                        En savoir plus →
-                    </a>
                 </div>
                 
                 <!-- Batterie -->
-                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20 hover:border-green-400/50">
-                    <div class="bg-gradient-to-br from-green-500 to-green-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center transform -rotate-3 hover:-rotate-6 transition-transform">
+                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20">
+                    <div class="bg-gradient-to-br from-green-500 to-green-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center transform -rotate-3">
                         <i data-feather="battery" class="w-10 h-10 text-white"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-3 text-white">Batterie</h3>
@@ -767,17 +861,14 @@
                         </div>
                     </div>
                     
-                    <div class="bg-green-500/20 backdrop-blur-sm rounded-lg p-3 mb-4 border border-green-400/30">
+                    <div class="bg-green-500/20 backdrop-blur-sm rounded-lg p-3 border border-green-400/30">
                         <p class="text-sm font-semibold text-green-300">À partir de 39€</p>
                     </div>
-                    <a href="services.html#batterie" class="inline-block bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-2 rounded-full font-semibold hover:from-green-700 hover:to-emerald-700 transition-all transform hover:scale-105">
-                        En savoir plus →
-                    </a>
                 </div>
                 
                 <!-- Caméra -->
-                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20 hover:border-purple-400/50">
-                    <div class="bg-gradient-to-br from-purple-500 to-purple-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center transform rotate-3 hover:rotate-6 transition-transform">
+                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20">
+                    <div class="bg-gradient-to-br from-purple-500 to-purple-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center transform rotate-3">
                         <i data-feather="camera" class="w-10 h-10 text-white"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-3 text-white">Caméra</h3>
@@ -803,12 +894,9 @@
                         </div>
                     </div>
                     
-                    <div class="bg-purple-500/20 backdrop-blur-sm rounded-lg p-3 mb-4 border border-purple-400/30">
+                    <div class="bg-purple-500/20 backdrop-blur-sm rounded-lg p-3 border border-purple-400/30">
                         <p class="text-sm font-semibold text-purple-300">À partir de 59€</p>
                     </div>
-                    <a href="services.html#camera" class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105">
-                        En savoir plus →
-                    </a>
                 </div>
             </div>
             
@@ -838,14 +926,6 @@
 
     <!-- Why Choose Us -->
     <section class="py-20 relative overflow-hidden">
-        <!-- Background avec effets -->
-        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-black"></div>
-        <div class="absolute inset-0 grid-pattern opacity-10"></div>
-        <div class="absolute inset-0">
-            <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float"></div>
-            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float" style="animation-delay: 2s;"></div>
-            <div class="absolute top-1/2 left-1/2 w-96 h-96 bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-15 animate-float" style="animation-delay: 1s;"></div>
-        </div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 neon-text" style="text-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 60px rgba(139, 92, 246, 0.6);">Pourquoi Choisir ReparePhone ?</h2>
@@ -898,14 +978,6 @@
 
     <!-- Repair Showcase Section -->
     <section class="py-20 relative overflow-hidden">
-        <!-- Background avec effets -->
-        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-black"></div>
-        <div class="absolute inset-0 grid-pattern opacity-10"></div>
-        <div class="absolute inset-0 opacity-20">
-            <div class="absolute top-1/4 left-0 w-64 h-64 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl animate-float"></div>
-            <div class="absolute bottom-1/4 right-0 w-64 h-64 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl animate-float" style="animation-delay: 1.5s;"></div>
-            <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-pink-500 rounded-full mix-blend-screen filter blur-3xl animate-float" style="animation-delay: 1s;"></div>
-        </div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 neon-text" style="text-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 60px rgba(139, 92, 246, 0.6);">Nous Réparons Bien Plus Que Les Téléphones</h2>
@@ -996,25 +1068,11 @@
 
     <!-- Location Section -->
 
-    <!-- Photos Boutique Section (placée juste au-dessus du footer) -->
-    <section class="py-20 relative overflow-hidden">
-        <!-- Background avec effets -->
-        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-black"></div>
-        <div class="absolute inset-0 grid-pattern opacity-10"></div>
-        <div class="absolute inset-0">
-            <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
-            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
-        </div>
+    <!-- Photos Boutique et Contact Section -->
+    <section class="py-20 text-white relative overflow-hidden">
         <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 neon-text" style="text-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 60px rgba(139, 92, 246, 0.6);">Découvrez Notre Boutique</h2>
-                <p class="text-xl text-gray-300 mb-6">Un espace moderne et accueillant pour vos réparations</p>
-                <a href="boutiques.html" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-full font-bold text-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-xl transform hover:scale-105">
-                    📍 Voir les détails de notre boutique
-                </a>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Photos de la boutique -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
                 <!-- Intérieur -->
                 <a href="boutiques.html" class="photo-card rounded-2xl shadow-2xl overflow-hidden group cursor-pointer block">
                     <div class="relative h-96 overflow-hidden">
@@ -1039,22 +1097,8 @@
                     </div>
                 </a>
             </div>
-        </div>
-    </section>
-
-    <section class="py-20 location-card text-white relative overflow-hidden">
-        <!-- Background avec effets -->
-        <div class="absolute inset-0">
-            <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float"></div>
-            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float" style="animation-delay: 2s;"></div>
-        </div>
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-12">
-                <a href="boutiques.html" class="inline-block hover:scale-105 transition-transform duration-300">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-4 neon-text cursor-pointer" style="text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(59, 130, 246, 0.6);">📍 Notre Boutique à Toulouse</h2>
-                </a>
-                <p class="text-xl opacity-90" style="text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">Venez nous rendre visite, nous vous accueillons avec plaisir !</p>
-            </div>
+            
+            <!-- Informations de contact -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="glass-dark rounded-2xl p-8 border border-white/20 shadow-2xl relative overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
@@ -1128,14 +1172,6 @@
     
     <!-- Footer Futuriste -->
     <footer class="relative mt-20 overflow-hidden">
-        <!-- Background avec effets -->
-        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-black"></div>
-        <div class="absolute inset-0 grid-pattern opacity-10"></div>
-        <div class="absolute inset-0">
-            <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
-            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
-        </div>
-        
         <!-- Contenu du footer -->
         <div class="relative z-10 container mx-auto px-6 py-16">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
@@ -1287,10 +1323,10 @@
             const isMobile = window.innerWidth < 768;
             const particleCount = isMobile ? 10 : 25;
             const colors = [
+                'rgba(96, 165, 250, 0.6)',
+                'rgba(147, 197, 253, 0.6)',
+                'rgba(191, 219, 254, 0.6)',
                 'rgba(59, 130, 246, 0.6)',
-                'rgba(139, 92, 246, 0.6)',
-                'rgba(236, 72, 153, 0.6)',
-                'rgba(6, 182, 212, 0.6)',
                 'rgba(255, 255, 255, 0.4)'
             ];
             
