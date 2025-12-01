@@ -156,6 +156,44 @@
             position: relative;
         }
         
+        /* Image personnage retour.png à gauche */
+        .personnage-retour {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: auto;
+            height: 80%;
+            max-height: 500px;
+            object-fit: contain;
+            object-position: left top;
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 1024px) {
+            .personnage-retour {
+                height: 70%;
+                max-height: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .personnage-retour {
+                height: 60%;
+                max-height: 300px;
+                opacity: 0.8;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .personnage-retour {
+                height: 50%;
+                max-height: 250px;
+                opacity: 0.7;
+            }
+        }
+        
         .gradient-animated::before {
             content: '';
             position: absolute;
@@ -255,7 +293,7 @@
         .service-card {
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
@@ -345,7 +383,7 @@
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
@@ -391,7 +429,7 @@
         .showcase-card {
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
@@ -475,28 +513,26 @@
             transform: translate3d(0, -10px, 0) scale(1.02);
         }
         .location-card {
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 30%, #8b5cf6 60%, #ec4899 100%);
-            background-size: 400% 400%;
-            animation: gradient-shift 15s ease infinite;
+            background: linear-gradient(to bottom, #111827 0%, #1f2937 50%, #111827 100%);
             position: relative;
             overflow: hidden;
         }
         .location-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-            animation: rotate-slow 25s linear infinite;
+            inset: 0;
+            background-image: linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
         }
         .location-card::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-            animation: shimmer 4s infinite;
+            background: radial-gradient(ellipse at top left, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                        radial-gradient(ellipse at bottom right, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            pointer-events: none;
         }
         .icon-wrapper {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -579,7 +615,7 @@
         }
     </style>
 </head>
-<body class="bg-white">
+<body class="bg-gray-900">
     <!-- Header/Navigation Component -->
     <custom-header></custom-header>
 
@@ -602,7 +638,10 @@
         <!-- Grid pattern overlay -->
         <div class="absolute inset-0 grid-pattern opacity-20"></div>
         
-        <img src="asset/brigademobile.png" class="absolute right-0 bottom-0 w-48 md:w-72 opacity-20 md:opacity-30 pointer-events-none select-none glow-on-hover" alt="Téléphone PNG" style="filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));" />
+        <!-- Personnage retour.png à gauche -->
+        <img src="asset/retour.png" class="personnage-retour" alt="Personnage" />
+        
+        <img src="asset/brigademobile.png" class="absolute right-0 bottom-0 w-48 md:w-72 opacity-20 md:opacity-30 pointer-events-none select-none glow-on-hover z-2" alt="Téléphone PNG" style="filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));" />
         
         <div class="container mx-auto px-6 text-center relative z-10">
             <div class="fade-in">
@@ -626,6 +665,9 @@
                 <a href="services.html" class="glass border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 shadow-xl relative z-10 transform hover:scale-105 neon-border">
                     <span class="relative z-10">Découvrir Nos Services</span>
                 </a>
+                <a href="boutiques.html" class="glass border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 shadow-xl relative z-10 transform hover:scale-105 neon-border">
+                    <span class="relative z-10">📍 Nos Boutiques</span>
+                </a>
             </div>
             
             <!-- Trust indicators -->
@@ -647,122 +689,124 @@
     </section>
 
     <!-- Services Preview -->
-    <section class="py-20 bg-gradient-to-b from-blue-50 via-white to-blue-50 relative overflow-hidden">
+    <section class="py-20 relative overflow-hidden">
+        <!-- Background avec effets -->
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-black"></div>
         <div class="absolute inset-0 grid-pattern opacity-10"></div>
         <div class="absolute inset-0">
-            <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"></div>
-            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style="animation-delay: 2s;"></div>
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float" style="animation-delay: 2s;"></div>
         </div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-blue-800 mb-4 neon-text" style="text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);">Nos Services de Réparation</h2>
-                <p class="text-xl text-gray-600" style="text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">Des solutions complètes pour tous vos besoins</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 neon-text" style="text-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 60px rgba(139, 92, 246, 0.6);">Nos Services de Réparation</h2>
+                <p class="text-xl text-gray-300">Des solutions complètes pour tous vos besoins</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Écran Cassé -->
-                <div class="service-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-blue-500">
+                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20 hover:border-blue-400/50">
                     <div class="bg-gradient-to-br from-blue-500 to-blue-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center transform rotate-3 hover:rotate-6 transition-transform">
                         <i data-feather="smartphone" class="w-10 h-10 text-white"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3 text-gray-800">Écran Cassé</h3>
-                    <p class="text-gray-600 mb-6">Remplacement d'écran pour tous modèles de téléphone.</p>
+                    <h3 class="text-2xl font-bold mb-3 text-white">Écran Cassé</h3>
+                    <p class="text-gray-300 mb-6">Remplacement d'écran pour tous modèles de téléphone.</p>
                     
                     <!-- Sous-services -->
                     <div class="space-y-2 mb-6">
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
-                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
+                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                             <span>Écran LCD/OLED</span>
                         </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
-                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
+                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                             <span>Vitre tactile</span>
                         </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
-                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
+                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                             <span>Réparation express</span>
                         </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
-                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
+                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                             <span>Toutes marques</span>
                         </div>
                     </div>
                     
-                    <div class="bg-blue-50 rounded-lg p-3 mb-4">
-                        <p class="text-sm font-semibold text-blue-700">À partir de 49€</p>
+                    <div class="bg-blue-500/20 backdrop-blur-sm rounded-lg p-3 mb-4 border border-blue-400/30">
+                        <p class="text-sm font-semibold text-blue-300">À partir de 49€</p>
                     </div>
-                    <a href="services.html#ecran" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition-all transform hover:scale-105">
+                    <a href="services.html#ecran" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full font-semibold hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105">
                         En savoir plus →
                     </a>
                 </div>
                 
                 <!-- Batterie -->
-                <div class="service-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-blue-500">
+                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20 hover:border-green-400/50">
                     <div class="bg-gradient-to-br from-green-500 to-green-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center transform -rotate-3 hover:-rotate-6 transition-transform">
                         <i data-feather="battery" class="w-10 h-10 text-white"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3 text-gray-800">Batterie</h3>
-                    <p class="text-gray-600 mb-6">Remplacement de batterie pour une autonomie retrouvée.</p>
+                    <h3 class="text-2xl font-bold mb-3 text-white">Batterie</h3>
+                    <p class="text-gray-300 mb-6">Remplacement de batterie pour une autonomie retrouvée.</p>
                     
                     <!-- Sous-services -->
                     <div class="space-y-2 mb-6">
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
-                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
+                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                             <span>Batterie originale</span>
                         </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
-                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
+                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                             <span>Diagnostic gratuit</span>
                         </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
-                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
+                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                             <span>Autonomie restaurée</span>
                         </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
-                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
+                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                             <span>Installation rapide</span>
                         </div>
                     </div>
                     
-                    <div class="bg-green-50 rounded-lg p-3 mb-4">
-                        <p class="text-sm font-semibold text-green-700">À partir de 39€</p>
+                    <div class="bg-green-500/20 backdrop-blur-sm rounded-lg p-3 mb-4 border border-green-400/30">
+                        <p class="text-sm font-semibold text-green-300">À partir de 39€</p>
                     </div>
-                    <a href="services.html#batterie" class="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition-all transform hover:scale-105">
+                    <a href="services.html#batterie" class="inline-block bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-2 rounded-full font-semibold hover:from-green-700 hover:to-emerald-700 transition-all transform hover:scale-105">
                         En savoir plus →
                     </a>
                 </div>
                 
                 <!-- Caméra -->
-                <div class="service-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-blue-500">
+                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20 hover:border-purple-400/50">
                     <div class="bg-gradient-to-br from-purple-500 to-purple-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center transform rotate-3 hover:rotate-6 transition-transform">
                         <i data-feather="camera" class="w-10 h-10 text-white"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3 text-gray-800">Caméra</h3>
-                    <p class="text-gray-600 mb-6">Réparation et remplacement de caméra défectueuse.</p>
+                    <h3 class="text-2xl font-bold mb-3 text-white">Caméra</h3>
+                    <p class="text-gray-300 mb-6">Réparation et remplacement de caméra défectueuse.</p>
                     
                     <!-- Sous-services -->
                     <div class="space-y-2 mb-6">
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
-                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
+                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                             <span>Caméra arrière/avant</span>
                         </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
-                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
+                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                             <span>Flash LED</span>
                         </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
-                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
+                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                             <span>Calibration</span>
                         </div>
-                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-700">
-                            <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                        <div class="sub-service flex items-center justify-center gap-2 text-sm text-gray-300">
+                            <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                             <span>Qualité optimale</span>
                         </div>
                     </div>
                     
-                    <div class="bg-purple-50 rounded-lg p-3 mb-4">
-                        <p class="text-sm font-semibold text-purple-700">À partir de 59€</p>
+                    <div class="bg-purple-500/20 backdrop-blur-sm rounded-lg p-3 mb-4 border border-purple-400/30">
+                        <p class="text-sm font-semibold text-purple-300">À partir de 59€</p>
                     </div>
-                    <a href="services.html#camera" class="inline-block bg-purple-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-purple-700 transition-all transform hover:scale-105">
+                    <a href="services.html#camera" class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105">
                         En savoir plus →
                     </a>
                 </div>
@@ -770,80 +814,82 @@
             
             <!-- Additional services row -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-                <div class="service-card bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl shadow-lg p-6 text-center border-2 border-orange-200">
-                    <i data-feather="wifi" class="w-12 h-12 mx-auto text-orange-600 mb-4"></i>
-                    <h4 class="font-bold mb-2">Connecteur</h4>
-                    <p class="text-sm text-gray-600 mb-3">Port de charge, jack audio</p>
-                    <span class="text-xs font-semibold text-orange-700">À partir de 35€</span>
+                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg p-6 text-center border border-white/20 hover:border-orange-400/50">
+                    <i data-feather="wifi" class="w-12 h-12 mx-auto text-orange-400 mb-4"></i>
+                    <h4 class="font-bold mb-2 text-white">Connecteur</h4>
+                    <p class="text-sm text-gray-300 mb-3">Port de charge, jack audio</p>
+                    <span class="text-xs font-semibold text-orange-300">À partir de 35€</span>
                 </div>
-                <div class="service-card bg-gradient-to-br from-red-50 to-red-100 rounded-2xl shadow-lg p-6 text-center border-2 border-red-200">
-                    <i data-feather="droplet" class="w-12 h-12 mx-auto text-red-600 mb-4"></i>
-                    <h4 class="font-bold mb-2">Désoxydation</h4>
-                    <p class="text-sm text-gray-600 mb-3">Traitement anti-eau</p>
-                    <span class="text-xs font-semibold text-red-700">À partir de 45€</span>
+                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg p-6 text-center border border-white/20 hover:border-red-400/50">
+                    <i data-feather="droplet" class="w-12 h-12 mx-auto text-red-400 mb-4"></i>
+                    <h4 class="font-bold mb-2 text-white">Désoxydation</h4>
+                    <p class="text-sm text-gray-300 mb-3">Traitement anti-eau</p>
+                    <span class="text-xs font-semibold text-red-300">À partir de 45€</span>
                 </div>
-                <div class="service-card bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-2xl shadow-lg p-6 text-center border-2 border-indigo-200">
-                    <i data-feather="tool" class="w-12 h-12 mx-auto text-indigo-600 mb-4"></i>
-                    <h4 class="font-bold mb-2">Diagnostic</h4>
-                    <p class="text-sm text-gray-600 mb-3">Analyse complète gratuite</p>
-                    <span class="text-xs font-semibold text-indigo-700">Gratuit</span>
+                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg p-6 text-center border border-white/20 hover:border-indigo-400/50">
+                    <i data-feather="tool" class="w-12 h-12 mx-auto text-indigo-400 mb-4"></i>
+                    <h4 class="font-bold mb-2 text-white">Diagnostic</h4>
+                    <p class="text-sm text-gray-300 mb-3">Analyse complète gratuite</p>
+                    <span class="text-xs font-semibold text-indigo-300">Gratuit</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Why Choose Us -->
-    <section class="py-20 bg-gradient-to-b from-white via-blue-50 to-white relative overflow-hidden">
+    <section class="py-20 relative overflow-hidden">
+        <!-- Background avec effets -->
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-black"></div>
         <div class="absolute inset-0 grid-pattern opacity-10"></div>
         <div class="absolute inset-0">
-            <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-float" style="box-shadow: 0 0 100px rgba(59, 130, 246, 0.4);"></div>
-            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-float" style="animation-delay: 2s; box-shadow: 0 0 100px rgba(139, 92, 246, 0.4);"></div>
-            <div class="absolute top-1/2 left-1/2 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style="animation-delay: 1s; box-shadow: 0 0 100px rgba(236, 72, 153, 0.3);"></div>
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float" style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/2 left-1/2 w-96 h-96 bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-15 animate-float" style="animation-delay: 1s;"></div>
         </div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-blue-800 mb-4 neon-text" style="text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);">Pourquoi Choisir ReparePhone ?</h2>
-                <p class="text-xl text-gray-600" style="text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">L'excellence au service de votre technologie</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 neon-text" style="text-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 60px rgba(139, 92, 246, 0.6);">Pourquoi Choisir ReparePhone ?</h2>
+                <p class="text-xl text-gray-300">L'excellence au service de votre technologie</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="feature-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-blue-500 relative">
+                <div class="feature-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20 hover:border-blue-400/50 relative">
                     <div class="icon-wrapper bg-gradient-to-br from-blue-500 to-blue-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center">
                         <i data-feather="clock" class="w-10 h-10 text-white"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3 text-gray-800">⚡ Rapide</h3>
-                    <p class="text-gray-600 mb-4">Réparations express, souvent le jour même.</p>
-                    <div class="bg-blue-50 rounded-lg p-3">
-                        <p class="text-sm font-semibold text-blue-700">30 min en moyenne</p>
+                    <h3 class="text-2xl font-bold mb-3 text-white">⚡ Rapide</h3>
+                    <p class="text-gray-300 mb-4">Réparations express, souvent le jour même.</p>
+                    <div class="bg-blue-500/20 backdrop-blur-sm rounded-lg p-3 border border-blue-400/30">
+                        <p class="text-sm font-semibold text-blue-300">30 min en moyenne</p>
                     </div>
                 </div>
-                <div class="feature-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-green-500 relative">
+                <div class="feature-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20 hover:border-green-400/50 relative">
                     <div class="icon-wrapper bg-gradient-to-br from-green-500 to-green-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center">
                         <i data-feather="dollar-sign" class="w-10 h-10 text-white"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3 text-gray-800">💰 Économique</h3>
-                    <p class="text-gray-600 mb-4">Prix transparents et compétitifs.</p>
-                    <div class="bg-green-50 rounded-lg p-3">
-                        <p class="text-sm font-semibold text-green-700">Devis gratuit</p>
+                    <h3 class="text-2xl font-bold mb-3 text-white">💰 Économique</h3>
+                    <p class="text-gray-300 mb-4">Prix transparents et compétitifs.</p>
+                    <div class="bg-green-500/20 backdrop-blur-sm rounded-lg p-3 border border-green-400/30">
+                        <p class="text-sm font-semibold text-green-300">Devis gratuit</p>
                     </div>
                 </div>
-                <div class="feature-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-purple-500 relative">
+                <div class="feature-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20 hover:border-purple-400/50 relative">
                     <div class="icon-wrapper bg-gradient-to-br from-purple-500 to-purple-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center">
                         <i data-feather="shield" class="w-10 h-10 text-white"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3 text-gray-800">🛡️ Garantie</h3>
-                    <p class="text-gray-600 mb-4">6 mois de garantie sur toutes nos réparations.</p>
-                    <div class="bg-purple-50 rounded-lg p-3">
-                        <p class="text-sm font-semibold text-purple-700">100% couvert</p>
+                    <h3 class="text-2xl font-bold mb-3 text-white">🛡️ Garantie</h3>
+                    <p class="text-gray-300 mb-4">6 mois de garantie sur toutes nos réparations.</p>
+                    <div class="bg-purple-500/20 backdrop-blur-sm rounded-lg p-3 border border-purple-400/30">
+                        <p class="text-sm font-semibold text-purple-300">100% couvert</p>
                     </div>
                 </div>
-                <div class="feature-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-orange-500 relative">
+                <div class="feature-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20 hover:border-orange-400/50 relative">
                     <div class="icon-wrapper bg-gradient-to-br from-orange-500 to-orange-700 w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center">
                         <i data-feather="map-pin" class="w-10 h-10 text-white"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3 text-gray-800">📍 Local</h3>
-                    <p class="text-gray-600 mb-4">Au cœur de Toulouse, facile d'accès.</p>
-                    <div class="bg-orange-50 rounded-lg p-3">
-                        <p class="text-sm font-semibold text-orange-700">Métro L1 & Bus 70</p>
+                    <h3 class="text-2xl font-bold mb-3 text-white">📍 Local</h3>
+                    <p class="text-gray-300 mb-4">Au cœur de Toulouse, facile d'accès.</p>
+                    <div class="bg-orange-500/20 backdrop-blur-sm rounded-lg p-3 border border-orange-400/30">
+                        <p class="text-sm font-semibold text-orange-300">Métro L1 & Bus 70</p>
                     </div>
                 </div>
             </div>
@@ -851,40 +897,42 @@
     </section>
 
     <!-- Repair Showcase Section -->
-    <section class="py-20 bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden">
+    <section class="py-20 relative overflow-hidden">
+        <!-- Background avec effets -->
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-black"></div>
         <div class="absolute inset-0 grid-pattern opacity-10"></div>
         <div class="absolute inset-0 opacity-20">
-            <div class="absolute top-1/4 left-0 w-64 h-64 bg-blue-400 rounded-full filter blur-3xl animate-float" style="box-shadow: 0 0 80px rgba(59, 130, 246, 0.5);"></div>
-            <div class="absolute bottom-1/4 right-0 w-64 h-64 bg-purple-400 rounded-full filter blur-3xl animate-float" style="animation-delay: 1.5s; box-shadow: 0 0 80px rgba(139, 92, 246, 0.5);"></div>
-            <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-pink-400 rounded-full filter blur-3xl animate-float" style="animation-delay: 1s; box-shadow: 0 0 80px rgba(236, 72, 153, 0.5);"></div>
+            <div class="absolute top-1/4 left-0 w-64 h-64 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl animate-float"></div>
+            <div class="absolute bottom-1/4 right-0 w-64 h-64 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl animate-float" style="animation-delay: 1.5s;"></div>
+            <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-pink-500 rounded-full mix-blend-screen filter blur-3xl animate-float" style="animation-delay: 1s;"></div>
         </div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-blue-800 mb-4 neon-text" style="text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);">Nous Réparons Bien Plus Que Les Téléphones</h2>
-                <p class="text-xl text-gray-600" style="text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">Votre partenaire technologique pour tous vos appareils</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 neon-text" style="text-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 60px rgba(139, 92, 246, 0.6);">Nous Réparons Bien Plus Que Les Téléphones</h2>
+                <p class="text-xl text-gray-300">Votre partenaire technologique pour tous vos appareils</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <!-- Phone Broken -->
-                <div class="showcase-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-blue-500 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-100 rounded-full -mr-16 -mt-16 opacity-50"></div>
+                <div class="showcase-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20 hover:border-blue-400/50 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 rounded-full -mr-16 -mt-16"></div>
                     <div class="relative z-10">
                         <div class="bg-gradient-to-br from-blue-500 to-blue-700 w-24 h-24 rounded-2xl mx-auto mb-6 flex items-center justify-center transform hover:scale-110 transition-transform shadow-lg">
                             <img src="asset/images.jpg" class="w-16 h-16 object-cover rounded-xl" alt="iPhone cassé">
                         </div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-800">📱 iPhone & Smartphones</h3>
-                        <p class="text-gray-600 mb-6">Réparation d'écrans cassés, batteries, caméras, connecteurs... toutes marques.</p>
+                        <h3 class="text-2xl font-bold mb-4 text-white">📱 iPhone & Smartphones</h3>
+                        <p class="text-gray-300 mb-6">Réparation d'écrans cassés, batteries, caméras, connecteurs... toutes marques.</p>
                         <div class="space-y-2 text-left">
-                            <div class="flex items-center gap-2 text-sm text-gray-700">
-                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                                 <span>iPhone, Samsung, Huawei</span>
                             </div>
-                            <div class="flex items-center gap-2 text-sm text-gray-700">
-                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                                 <span>Tablettes & Smartwatches</span>
                             </div>
-                            <div class="flex items-center gap-2 text-sm text-gray-700">
-                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                                 <span>Pièces d'origine</span>
                             </div>
                         </div>
@@ -892,25 +940,25 @@
                 </div>
 
                 <!-- Macbook -->
-                <div class="showcase-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-purple-500 relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-32 h-32 bg-purple-100 rounded-full -ml-16 -mt-16 opacity-50"></div>
+                <div class="showcase-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20 hover:border-purple-400/50 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-32 h-32 bg-purple-500/20 rounded-full -ml-16 -mt-16"></div>
                     <div class="relative z-10">
                         <div class="bg-gradient-to-br from-purple-500 to-purple-700 w-24 h-24 rounded-2xl mx-auto mb-6 flex items-center justify-center transform hover:scale-110 transition-transform shadow-lg">
                             <img src="asset/mac.png" class="w-20 h-20 object-cover rounded-xl" alt="Réparation Macbook">
                         </div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-800">💻 Ordinateurs & MacBook</h3>
-                        <p class="text-gray-600 mb-6">Nous réparons PC portables, ordinateurs fixes, MacBook et iMac.</p>
+                        <h3 class="text-2xl font-bold mb-4 text-white">💻 Ordinateurs & MacBook</h3>
+                        <p class="text-gray-300 mb-6">Nous réparons PC portables, ordinateurs fixes, MacBook et iMac.</p>
                         <div class="space-y-2 text-left">
-                            <div class="flex items-center gap-2 text-sm text-gray-700">
-                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                                 <span>MacBook Pro/Air, iMac</span>
                             </div>
-                            <div class="flex items-center gap-2 text-sm text-gray-700">
-                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                                 <span>PC Windows & Linux</span>
                             </div>
-                            <div class="flex items-center gap-2 text-sm text-gray-700">
-                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                                 <span>Écrans & Claviers</span>
                             </div>
                         </div>
@@ -918,25 +966,25 @@
                 </div>
 
                 <!-- Printer -->
-                <div class="showcase-card bg-white rounded-2xl shadow-xl p-8 text-center border-2 border-transparent hover:border-orange-500 relative overflow-hidden">
-                    <div class="absolute bottom-0 right-0 w-32 h-32 bg-orange-100 rounded-full -mr-16 -mb-16 opacity-50"></div>
+                <div class="showcase-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl p-8 text-center border border-white/20 hover:border-orange-400/50 relative overflow-hidden">
+                    <div class="absolute bottom-0 right-0 w-32 h-32 bg-orange-500/20 rounded-full -mr-16 -mb-16"></div>
                     <div class="relative z-10">
                         <div class="bg-gradient-to-br from-orange-500 to-orange-700 w-24 h-24 rounded-2xl mx-auto mb-6 flex items-center justify-center transform hover:scale-110 transition-transform shadow-lg">
                             <img src="asset/unite.jpg" class="w-16 h-16 object-cover rounded-xl" alt="Réparation imprimantes">
                         </div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-800">🖥️ Unité centrale & Accessoires</h3>
-                        <p class="text-gray-600 mb-6">Déblocage d'ordinateurs et réparation d'unités centrales.</p>
+                        <h3 class="text-2xl font-bold mb-4 text-white">🖥️ Unité centrale & Accessoires</h3>
+                        <p class="text-gray-300 mb-6">Déblocage d'ordinateurs et réparation d'unités centrales.</p>
                         <div class="space-y-2 text-left">
-                            <div class="flex items-center gap-2 text-sm text-gray-700">
-                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                                 <span>Déblocage système</span>
                             </div>
-                            <div class="flex items-center gap-2 text-sm text-gray-700">
-                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                                 <span>Réparation hardware</span>
                             </div>
-                            <div class="flex items-center gap-2 text-sm text-gray-700">
-                                <i data-feather="check" class="w-4 h-4 text-green-500"></i>
+                            <div class="flex items-center gap-2 text-sm text-gray-300">
+                                <i data-feather="check" class="w-4 h-4 text-green-400"></i>
                                 <span>Upgrade & Maintenance</span>
                             </div>
                         </div>
@@ -949,19 +997,26 @@
     <!-- Location Section -->
 
     <!-- Photos Boutique Section (placée juste au-dessus du footer) -->
-    <section class="py-20 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+    <section class="py-20 relative overflow-hidden">
+        <!-- Background avec effets -->
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-black"></div>
+        <div class="absolute inset-0 grid-pattern opacity-10"></div>
         <div class="absolute inset-0">
-            <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+            <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
         </div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-blue-800 mb-4 neon-text" style="text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);">Découvrez Notre Boutique</h2>
-                <p class="text-xl text-gray-600" style="text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">Un espace moderne et accueillant pour vos réparations</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 neon-text" style="text-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 60px rgba(139, 92, 246, 0.6);">Découvrez Notre Boutique</h2>
+                <p class="text-xl text-gray-300 mb-6">Un espace moderne et accueillant pour vos réparations</p>
+                <a href="boutiques.html" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-full font-bold text-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-xl transform hover:scale-105">
+                    📍 Voir les détails de notre boutique
+                </a>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <!-- Intérieur -->
-                <div class="photo-card rounded-2xl shadow-2xl overflow-hidden group cursor-pointer">
+                <a href="boutiques.html" class="photo-card rounded-2xl shadow-2xl overflow-hidden group cursor-pointer block">
                     <div class="relative h-96 overflow-hidden">
                         <img src="asset/image2.png" alt="Intérieur de la boutique" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -970,10 +1025,10 @@
                             <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Un espace moderne équipé des dernières technologies</p>
                         </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- Extérieur -->
-                <div class="photo-card rounded-2xl shadow-2xl overflow-hidden group cursor-pointer">
+                <a href="boutiques.html" class="photo-card rounded-2xl shadow-2xl overflow-hidden group cursor-pointer block">
                     <div class="relative h-96 overflow-hidden">
                         <img src="asset/image.png" alt="Extérieur de la boutique" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -982,23 +1037,29 @@
                             <p class="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Facilement accessible en métro L1 et bus 70</p>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
 
     <section class="py-20 location-card text-white relative overflow-hidden">
-        <div class="absolute inset-0 bg-black/20"></div>
+        <!-- Background avec effets -->
+        <div class="absolute inset-0">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float" style="animation-delay: 2s;"></div>
+        </div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 neon-text" style="text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(59, 130, 246, 0.6);">📍 Notre Boutique à Toulouse</h2>
+                <a href="boutiques.html" class="inline-block hover:scale-105 transition-transform duration-300">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4 neon-text cursor-pointer" style="text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(59, 130, 246, 0.6);">📍 Notre Boutique à Toulouse</h2>
+                </a>
                 <p class="text-xl opacity-90" style="text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">Venez nous rendre visite, nous vous accueillons avec plaisir !</p>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="glass-dark rounded-2xl p-8 border border-white/20 shadow-2xl relative overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
                     <div class="relative z-10">
-                        <div class="space-y-6">
+                    <div class="space-y-6">
                         <div class="flex items-start gap-4 group">
                             <div class="bg-white/20 p-3 rounded-xl group-hover:bg-white/30 transition-colors">
                                 <i data-feather="map-pin" class="w-6 h-6"></i>
@@ -1042,10 +1103,15 @@
                                 <p class="opacity-90">Lun-Ven: 9h-19h<br>Sam: 10h-18h</p>
                             </div>
                         </div>
-                        </div>
-                        <a href="contact.html" class="mt-8 inline-block bg-white text-blue-800 px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-50 transition-all duration-300 shadow-2xl transform hover:scale-105 w-full text-center relative z-10">
-                            ✨ Nous Contacter
-                        </a>
+                    </div>
+                        <div class="flex flex-col gap-4 mt-8">
+                            <a href="contact.html" class="inline-block bg-white text-blue-800 px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-50 transition-all duration-300 shadow-2xl transform hover:scale-105 w-full text-center relative z-10">
+                        ✨ Nous Contacter
+                    </a>
+                            <a href="boutiques.html" class="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-2xl transform hover:scale-105 w-full text-center relative z-10 border-2 border-white/20">
+                                📍 Découvrir Notre Boutique
+                            </a>
+                </div>
                     </div>
                 </div>
                 <div class="glass-dark rounded-2xl p-4 shadow-2xl border border-white/20 transform hover:scale-105 transition-all duration-300 relative overflow-hidden">
@@ -1060,7 +1126,141 @@
     </section>
 
     
-    <custom-footer></custom-footer>
+    <!-- Footer Futuriste -->
+    <footer class="relative mt-20 overflow-hidden">
+        <!-- Background avec effets -->
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-black"></div>
+        <div class="absolute inset-0 grid-pattern opacity-10"></div>
+        <div class="absolute inset-0">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
+        </div>
+        
+        <!-- Contenu du footer -->
+        <div class="relative z-10 container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Logo et Description -->
+                <div class="lg:col-span-1">
+                    <h3 class="text-2xl font-bold text-white mb-4 neon-text" style="text-shadow: 0 0 20px rgba(59, 130, 246, 0.6);">ReparePhone</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Votre expert en réparation de téléphone à Toulouse. Service rapide, pièces d'origine, garantie 6 mois.
+                    </p>
+                    <div class="flex items-center gap-2 text-sm text-gray-400">
+                        <i data-feather="star" class="w-4 h-4 text-yellow-400"></i>
+                        <span>4.9/5 ⭐ (200+ avis)</span>
+                    </div>
+                </div>
+                
+                <!-- Navigation -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i data-feather="navigation" class="w-5 h-5 text-blue-400"></i>
+                        Navigation
+                    </h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
+                                <i data-feather="home" class="w-4 h-4 group-hover:text-blue-400 transition-colors"></i>
+                                Accueil
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
+                                <i data-feather="tool" class="w-4 h-4 group-hover:text-blue-400 transition-colors"></i>
+                                Nos Services
+                            </a>
+                        </li>
+                        <li>
+                            <a href="boutiques.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
+                                <i data-feather="map-pin" class="w-4 h-4 group-hover:text-blue-400 transition-colors"></i>
+                                Nos Boutiques
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group">
+                                <i data-feather="mail" class="w-4 h-4 group-hover:text-blue-400 transition-colors"></i>
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i data-feather="phone" class="w-5 h-5 text-blue-400"></i>
+                        Contact
+                    </h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <i data-feather="map-pin" class="w-5 h-5 text-blue-400 flex-shrink-0 mt-1"></i>
+                            <div class="text-gray-400">
+                                <p>65 Route de Blagnac</p>
+                                <p>31300 Toulouse</p>
+                                <div class="flex items-center gap-2 mt-2">
+                                    <span class="bg-orange-500 text-white px-2 py-0.5 rounded text-xs font-bold">L1</span>
+                                    <span class="bg-pink-500 text-white px-2 py-0.5 rounded text-xs font-bold">70</span>
+                                    <span class="text-xs">Arrêt "Cité Madrid"</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-feather="phone" class="w-5 h-5 text-blue-400"></i>
+                            <a href="tel:0561234567" class="text-gray-400 hover:text-white transition-colors">05 61 23 45 67</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-feather="mail" class="w-5 h-5 text-blue-400"></i>
+                            <a href="mailto:contact@reparephone-toulouse.fr" class="text-gray-400 hover:text-white transition-colors break-all">contact@reparephone-toulouse.fr</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-feather="clock" class="w-5 h-5 text-blue-400 flex-shrink-0 mt-1"></i>
+                            <div class="text-gray-400">
+                                <p>Lun-Ven: 9h-19h</p>
+                                <p>Sam: 10h-18h</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Réseaux sociaux et CTA -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i data-feather="share-2" class="w-5 h-5 text-blue-400"></i>
+                        Suivez-nous
+                    </h4>
+                    <div class="flex gap-4 mb-6">
+                        <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-blue-500/30 transition-all transform hover:scale-110 border border-white/10 hover:border-blue-400/50">
+                            <i data-feather="facebook" class="w-6 h-6 text-white"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-pink-500/30 transition-all transform hover:scale-110 border border-white/10 hover:border-pink-400/50">
+                            <i data-feather="instagram" class="w-6 h-6 text-white"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-blue-400/30 transition-all transform hover:scale-110 border border-white/10 hover:border-blue-400/50">
+                            <i data-feather="twitter" class="w-6 h-6 text-white"></i>
+                        </a>
+                    </div>
+                    <a href="contact.html" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-bold text-sm hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg transform hover:scale-105 w-full text-center">
+                        ✨ Prendre RDV
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Séparateur -->
+            <div class="border-t border-white/10 my-8"></div>
+            
+            <!-- Bottom Bar -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-gray-400 text-sm">
+                    <p>&copy; 2025 ReparePhone - Tous droits réservés</p>
+                </div>
+                <div class="flex flex-wrap gap-6 text-sm">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Mentions légales</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">Politique de confidentialité</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script>
         feather.replace();
