@@ -174,8 +174,8 @@
         /* Section transition avec clés à molette */
         .wrench-divider {
             position: relative;
-            background: linear-gradient(to bottom, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%);
-            padding: 30px 0;
+            background: linear-gradient(to bottom, #93c5fd 0%, #60a5fa 30%, #3b82f6 60%, #1f2937 100%);
+            padding: 15px 0;
             overflow: hidden;
         }
         
@@ -184,51 +184,21 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            gap: 25px;
-            opacity: 0.3;
+            gap: 15px;
+            opacity: 0.25;
         }
         
         .wrench-icon {
-            color: rgba(59, 130, 246, 0.4);
-            animation: wrench-float 4s ease-in-out infinite;
-            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
-        }
-        
-        .wrench-icon:nth-child(1) { animation-delay: 0s; }
-        .wrench-icon:nth-child(2) { animation-delay: 0.3s; }
-        .wrench-icon:nth-child(3) { animation-delay: 0.6s; }
-        .wrench-icon:nth-child(4) { animation-delay: 0.9s; }
-        .wrench-icon:nth-child(5) { animation-delay: 1.2s; }
-        .wrench-icon:nth-child(6) { animation-delay: 1.5s; }
-        .wrench-icon:nth-child(7) { animation-delay: 1.8s; }
-        .wrench-icon:nth-child(8) { animation-delay: 2.1s; }
-        .wrench-icon:nth-child(9) { animation-delay: 2.4s; }
-        .wrench-icon:nth-child(10) { animation-delay: 2.7s; }
-        .wrench-icon:nth-child(11) { animation-delay: 3s; }
-        .wrench-icon:nth-child(12) { animation-delay: 3.3s; }
-        .wrench-icon:nth-child(13) { animation-delay: 3.6s; }
-        .wrench-icon:nth-child(14) { animation-delay: 3.9s; }
-        .wrench-icon:nth-child(15) { animation-delay: 4.2s; }
-        .wrench-icon:nth-child(16) { animation-delay: 4.5s; }
-        
-        @keyframes wrench-float {
-            0%, 100% { 
-                transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
-                opacity: 0.3;
-            }
-            50% { 
-                transform: translate3d(0, -15px, 0) rotate(15deg) scale(1.1);
-                opacity: 0.5;
-            }
+            color: rgba(59, 130, 246, 0.3);
         }
         
         @media (max-width: 768px) {
             .wrench-pattern {
-                gap: 25px;
+                gap: 10px;
             }
             .wrench-icon {
-                width: 32px;
-                height: 32px;
+                width: 20px;
+                height: 20px;
             }
         }
         
@@ -298,21 +268,33 @@
         }
         
         .glass-dark {
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        /* Reduce backdrop-filter on mobile for better performance */
+        /* Reduce backdrop-filter for better scroll performance */
         @media (max-width: 768px) {
             .glass,
             .glass-dark,
             .service-card,
             .feature-card,
             .showcase-card {
-                backdrop-filter: blur(5px);
-                -webkit-backdrop-filter: blur(5px);
+                backdrop-filter: blur(3px);
+                -webkit-backdrop-filter: blur(3px);
+            }
+        }
+        
+        /* Disable backdrop-filter on scroll for better performance */
+        @media (prefers-reduced-motion: no-preference) {
+            body.scrolling .glass,
+            body.scrolling .glass-dark,
+            body.scrolling .service-card,
+            body.scrolling .feature-card,
+            body.scrolling .showcase-card {
+                backdrop-filter: blur(2px);
+                -webkit-backdrop-filter: blur(2px);
             }
         }
         
@@ -665,9 +647,9 @@
             background-size: 50px 50px;
         }
         
-        /* Smooth scroll */
+        /* Smooth scroll - disabled for better performance */
         html {
-            scroll-behavior: smooth;
+            scroll-behavior: auto;
         }
         
         /* Respect user's motion preferences */
@@ -777,18 +759,12 @@
     <!-- Section transition avec clés à molette -->
     <section class="wrench-divider">
         <div class="wrench-pattern">
-            <i data-feather="tool" class="wrench-icon w-8 h-8"></i>
-            <i data-feather="tool" class="wrench-icon w-9 h-9"></i>
-            <i data-feather="tool" class="wrench-icon w-8 h-8"></i>
-            <i data-feather="tool" class="wrench-icon w-10 h-10"></i>
-            <i data-feather="tool" class="wrench-icon w-8 h-8"></i>
-            <i data-feather="tool" class="wrench-icon w-9 h-9"></i>
-            <i data-feather="tool" class="wrench-icon w-8 h-8"></i>
-            <i data-feather="tool" class="wrench-icon w-10 h-10"></i>
-            <i data-feather="tool" class="wrench-icon w-8 h-8"></i>
-            <i data-feather="tool" class="wrench-icon w-9 h-9"></i>
-            <i data-feather="tool" class="wrench-icon w-8 h-8"></i>
-            <i data-feather="tool" class="wrench-icon w-10 h-10"></i>
+            <i data-feather="tool" class="wrench-icon w-5 h-5"></i>
+            <i data-feather="tool" class="wrench-icon w-6 h-6"></i>
+            <i data-feather="tool" class="wrench-icon w-5 h-5"></i>
+            <i data-feather="tool" class="wrench-icon w-6 h-6"></i>
+            <i data-feather="tool" class="wrench-icon w-5 h-5"></i>
+            <i data-feather="tool" class="wrench-icon w-6 h-6"></i>
         </div>
     </section>
 
@@ -902,19 +878,19 @@
             
             <!-- Additional services row -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg p-6 text-center border border-white/20 hover:border-orange-400/50">
+                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg p-6 text-center border border-white/20">
                     <i data-feather="wifi" class="w-12 h-12 mx-auto text-orange-400 mb-4"></i>
                     <h4 class="font-bold mb-2 text-white">Connecteur</h4>
                     <p class="text-sm text-gray-300 mb-3">Port de charge, jack audio</p>
                     <span class="text-xs font-semibold text-orange-300">À partir de 35€</span>
                 </div>
-                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg p-6 text-center border border-white/20 hover:border-red-400/50">
+                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg p-6 text-center border border-white/20">
                     <i data-feather="droplet" class="w-12 h-12 mx-auto text-red-400 mb-4"></i>
                     <h4 class="font-bold mb-2 text-white">Désoxydation</h4>
                     <p class="text-sm text-gray-300 mb-3">Traitement anti-eau</p>
                     <span class="text-xs font-semibold text-red-300">À partir de 45€</span>
                 </div>
-                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg p-6 text-center border border-white/20 hover:border-indigo-400/50">
+                <div class="service-card bg-white/10 backdrop-blur-sm rounded-2xl shadow-lg p-6 text-center border border-white/20">
                     <i data-feather="tool" class="w-12 h-12 mx-auto text-indigo-400 mb-4"></i>
                     <h4 class="font-bold mb-2 text-white">Diagnostic</h4>
                     <p class="text-sm text-gray-300 mb-3">Analyse complète gratuite</p>
@@ -1359,36 +1335,10 @@
             });
         }
         
-        // Parallax effect for hero section - optimized with requestAnimationFrame
+        // Parallax effect disabled for better scroll performance
         function initParallax() {
-            // Disable parallax on mobile for better performance
-            if (window.innerWidth < 768) return;
-            
-            const hero = document.querySelector('.gradient-animated');
-            if (!hero) return;
-            
-            let ticking = false;
-            let lastScrollY = 0;
-            
-            const updateParallax = () => {
-                const scrolled = window.pageYOffset;
-                // Only update if scroll changed significantly
-                if (Math.abs(scrolled - lastScrollY) > 1) {
-                    const rate = scrolled * 0.2; // Further reduced intensity
-                    hero.style.transform = `translate3d(0, ${rate}px, 0)`;
-                    lastScrollY = scrolled;
-                }
-                ticking = false;
-            };
-            
-            const onScroll = () => {
-                if (!ticking) {
-                    window.requestAnimationFrame(updateParallax);
-                    ticking = true;
-                }
-            };
-            
-            window.addEventListener('scroll', onScroll, { passive: true });
+            // Parallax disabled to prevent scroll bugs
+            return;
         }
         
         // Animation on scroll
@@ -1401,43 +1351,34 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translate3d(0, 0, 0)';
                     entry.target.classList.add('fade-in');
-                    // Unobserve after animation to improve performance
+                    // Unobserve immediately to improve performance
                     observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
         
-        // Observe service cards
+        // Observe service cards - simplified for better scroll performance
         document.querySelectorAll('.service-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translate3d(0, 30px, 0)';
-            card.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            card.style.opacity = '0.9';
             observer.observe(card);
         });
         
-        // Observe feature cards
+        // Observe feature cards - simplified
         document.querySelectorAll('.feature-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translate3d(0, 30px, 0)';
-            card.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            card.style.opacity = '0.9';
             observer.observe(card);
         });
         
-        // Observe showcase cards
+        // Observe showcase cards - simplified
         document.querySelectorAll('.showcase-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translate3d(0, 30px, 0)';
-            card.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            card.style.opacity = '0.9';
             observer.observe(card);
         });
         
-        // Observe photo cards
+        // Observe photo cards - simplified
         document.querySelectorAll('.photo-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translate3d(0, 30px, 0)';
-            card.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            card.style.opacity = '0.9';
             observer.observe(card);
         });
         
@@ -1482,14 +1423,24 @@
             });
         });
         
-        // Smooth reveal on page load
-        window.addEventListener('load', () => {
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                document.body.style.transition = 'opacity 0.5s ease';
-                document.body.style.opacity = '1';
-            }, 100);
-        });
+        // Disable smooth reveal for better performance
+        // window.addEventListener('load', () => {
+        //     document.body.style.opacity = '0';
+        //     setTimeout(() => {
+        //         document.body.style.transition = 'opacity 0.5s ease';
+        //         document.body.style.opacity = '1';
+        //     }, 100);
+        // });
+        
+        // Optimize scroll performance
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            document.body.classList.add('scrolling');
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                document.body.classList.remove('scrolling');
+            }, 150);
+        }, { passive: true });
     </script>
 </body>
 </html>
