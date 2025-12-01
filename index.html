@@ -208,7 +208,7 @@
         .animate-glitch { animation: glitch 0.3s infinite; }
         
         .gradient-animated {
-            background: linear-gradient(to bottom, #111827 0%, #1f2937 50%, #111827 100%);
+            background: transparent;
             position: relative;
         }
         
@@ -583,26 +583,9 @@
             transform: translate3d(0, -10px, 0) scale(1.02);
         }
         .location-card {
-            background: linear-gradient(to bottom, #111827 0%, #1f2937 50%, #111827 100%);
             position: relative;
+            background: transparent;
             overflow: hidden;
-        }
-        .location-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px), 
-                              linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: 0.1;
-        }
-        .location-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at top left, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                        radial-gradient(ellipse at bottom right, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-            pointer-events: none;
         }
         .icon-wrapper {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
