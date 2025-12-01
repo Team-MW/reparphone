@@ -208,7 +208,7 @@
         .animate-glitch { animation: glitch 0.3s infinite; }
         
         .gradient-animated {
-            background: linear-gradient(to bottom, #dbeafe 0%, #bfdbfe 30%, #93c5fd 60%, #60a5fa 100%);
+            background: linear-gradient(to bottom, #111827 0%, #1f2937 50%, #111827 100%);
             position: relative;
         }
         
@@ -254,8 +254,10 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-            animation: shimmer 3s infinite;
+            background-image: linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
         }
         
         /* Glassmorphism */
@@ -697,10 +699,8 @@
         
         <!-- Animated background elements with enhanced glow -->
         <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute top-20 left-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-float" style="box-shadow: 0 0 100px rgba(191, 219, 254, 0.4);"></div>
-            <div class="absolute top-40 right-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-float" style="animation-delay: 1s; box-shadow: 0 0 100px rgba(147, 197, 253, 0.4);"></div>
-            <div class="absolute -bottom-8 left-1/2 w-72 h-72 bg-blue-200 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-float" style="animation-delay: 2s; box-shadow: 0 0 100px rgba(191, 219, 254, 0.4);"></div>
-            <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-blue-100 rounded-full mix-blend-screen filter blur-3xl opacity-25 animate-float" style="animation-delay: 1.5s; box-shadow: 0 0 120px rgba(219, 234, 254, 0.3);"></div>
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-float" style="animation-delay: 2s;"></div>
         </div>
         
         <!-- Grid pattern overlay -->
@@ -727,13 +727,13 @@
             
             <!-- CTA Buttons with enhanced effects -->
             <div class="flex flex-col md:flex-row justify-center gap-4 fade-in" style="animation-delay: 0.4s;">
-                <a href="contact.html" class="cta-button bg-white text-blue-600 px-10 py-4 rounded-full font-bold text-lg hover:bg-blue-50 transition-all duration-300 shadow-2xl animate-pulse-glow relative z-10 transform hover:scale-105">
-                    <span class="relative z-10 neon-text" style="text-shadow: 0 0 10px rgba(59, 130, 246, 0.8);">✨ Prendre RDV Maintenant</span>
+                <a href="contact.html" class="cta-button bg-gradient-to-r from-blue-500 to-purple-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-2xl relative z-10 transform hover:scale-105 border-2 border-black">
+                    <span class="relative z-10">✨ Prendre RDV Maintenant</span>
                 </a>
-                <a href="services.html" class="glass border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 shadow-xl relative z-10 transform hover:scale-105 neon-border">
+                <a href="services.html" class="bg-blue-400/90 backdrop-blur-sm border-2 border-black text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-blue-500/90 transition-all duration-300 shadow-xl relative z-10 transform hover:scale-105">
                     <span class="relative z-10">Découvrir Nos Services</span>
                 </a>
-                <a href="boutiques.html" class="glass border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 shadow-xl relative z-10 transform hover:scale-105 neon-border">
+                <a href="boutiques.html" class="bg-blue-400/90 backdrop-blur-sm border-2 border-black text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-blue-500/90 transition-all duration-300 shadow-xl relative z-10 transform hover:scale-105">
                     <span class="relative z-10">📍 Nos Boutiques</span>
                 </a>
             </div>
@@ -753,18 +753,6 @@
                     <span>4.9/5 ⭐ (200+ avis)</span>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Section transition avec clés à molette -->
-    <section class="wrench-divider">
-        <div class="wrench-pattern">
-            <i data-feather="tool" class="wrench-icon w-5 h-5"></i>
-            <i data-feather="tool" class="wrench-icon w-6 h-6"></i>
-            <i data-feather="tool" class="wrench-icon w-5 h-5"></i>
-            <i data-feather="tool" class="wrench-icon w-6 h-6"></i>
-            <i data-feather="tool" class="wrench-icon w-5 h-5"></i>
-            <i data-feather="tool" class="wrench-icon w-6 h-6"></i>
         </div>
     </section>
 
